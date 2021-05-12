@@ -19,15 +19,6 @@
 (define L1 (list 1 2 3 4))
 (define L2 (cons 'A (cons (cons 'B (cons 'C null)) null)))
 
-;Подсчет числа элементов в списке
-(define (LENGTH items)
-  (if  (null? items)
-       0
-       (+ 1 (LENGTH (cdr items)))))
-(LENGTH L1)
-(LENGTH L2)
-(LENGTH (cons (list 1 2) (list 3 4)))
-
 ;3 ДЗ Нарисовать стрелочную диаграмму для данного списка и объяснить полученный результат
 ; строчка 32 это то же самое что 29 в другом виде итого имеем ((1 2) 3 4) - поэтому длина 3
 (LENGTH (cons (cons 1 (cons 2 null)) (cons 3 (cons 4 null))))
