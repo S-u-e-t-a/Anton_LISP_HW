@@ -16,6 +16,9 @@
 (cons (cons 'A 'B) (cons (cons 'D (cons (cons 'C 'E) null)) null))
 
 ;Подсчет числа элементов в списке
+(define L1 (list 1 2 3 4))
+(define L2 (cons 'A (cons (cons 'B (cons 'C null)) null)))
+
 (define (LENGTH items)
   (if  (null? items)
        0
@@ -24,8 +27,6 @@
 (LENGTH L2)
 (LENGTH (cons (list 1 2) (list 3 4)))
 
-(define L1 (list 1 2 3 4))
-(define L2 (cons 'A (cons (cons 'B (cons 'C null)) null)))
 
 ;3 ДЗ Нарисовать стрелочную диаграмму для данного списка и объяснить полученный результат
 ; имеем ((1 2) 3 4) - поэтому длина 3
@@ -43,7 +44,26 @@
 (search L1 (read))
 
 ;задача 2 Модифицируйте программу, моделирующую посадку ракеты, таким образом, чтобы учесть требование замедления ракеты при посадке (от некоторой начальной скорости до нуля).
-; тут будет
+(require 2htdp/image)
+(require 2htdp/universe)
+
+;Константы
+(define HEIGHT 500)
+(define WIDTH 500)
+(define ESCN (empty-scene WIDTH HEIGHT))
+(define OBJECT (circle 40 "solid" "red"))
+(define STOP-POINT (- HEIGHT (/ (image-height OBJECT) 2)))
+
+(define v0 0)
+(define g 1.62)
+(define (a x)(* 42 (/ HEIGHT x)))
+
+(define (create-scene.v3 h)
+  (if (<= h STOP-POINT)
+  (place-image OBJECT 250 (- HEIGHT (a (+ h 25))) ESCN)
+  (place-image OBJECT 250 STOP-POINT ESCN)))
+
+(animate create-scene.v3)
 
 ;задача 3 Определите процедуру, которая принимает в качестве аргументов три числа и возвращает сумму квадратов двух больших из них.
 (define (func3 a b c)
@@ -78,3 +98,18 @@
     [else (display (binom n k)) (pascal n (+ k 1))]))
 
 (pascal 6 0)
+
+; задание 7 синус
+(define (cube x) (* x x x))
+
+(define (func x) (- (* 3 x) (* 4 (cube x))))
+
+(define (sin10 a)
+
+(if  (< (abs a) 0.1) (println "угол должен быть больше 0.1 радиан")
+
+(func (sin (/ a 3.0)))))
+
+
+(sin10 0.01)
+(sin10 3.142)
